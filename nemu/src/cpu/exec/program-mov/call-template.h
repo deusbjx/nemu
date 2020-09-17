@@ -9,7 +9,7 @@ make_helper(concat(call_i_, SUFFIX)) {
 	swaddr_write(reg_l(R_ESP),4,cpu.eip+length);
 	print_asm("call1 $0x%x",value);
 	cpu.eip+=value;
-	return length+1;
+	return -value;
 }
 
 make_helper(concat(call_rm_, SUFFIX)) {
