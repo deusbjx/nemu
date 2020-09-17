@@ -36,4 +36,5 @@
 #include "program-mov/call.h"
 #include "program-mov/je.h"
 #include "program-mov/ret.h"
+#include "program-mov/jmp.h"
 
