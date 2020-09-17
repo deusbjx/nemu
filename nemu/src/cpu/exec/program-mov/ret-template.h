@@ -14,7 +14,7 @@ make_helper(concat(ret_i_, SUFFIX)) {
 	if (DATA_BYTE == 2){
 		cpu.eip &= 0xffff;
 	}
-	MEM_W(REG(R_ESP)+i,0);
+	//MEM_W(REG(R_ESP)+i,0);
 	REG(R_ESP)+=value;
 	print_asm("ret 0x%x",value);
 	return 0;
