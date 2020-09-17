@@ -3,7 +3,7 @@
 
 //make_helper(test_i2r_a);
 make_helper(test_i2rm_b);
-//make_helper(test_r2rm_b);
+make_helper(test_r2rm_b);
 
 //make_helper(test_i2r_a);
 make_helper(test_i2rm_v);
