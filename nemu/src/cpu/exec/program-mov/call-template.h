@@ -8,8 +8,8 @@ make_helper(concat(call_i_, SUFFIX)) {
 	reg_l(R_ESP) -= DATA_BYTE;
 	swaddr_write(reg_l(R_ESP),4,cpu.eip+length);
 	print_asm("call1 $0x%x",cpu.eip+1+length+value);
+	print_asm("eip $0x%x,%d",cpu.eip,length);
 	cpu.eip+=length;
-	//print_asm("eip $0x%x,%d",cpu.eip,length);
 	return length+1;
 }
 
