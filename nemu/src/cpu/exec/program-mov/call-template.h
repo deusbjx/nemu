@@ -9,8 +9,8 @@ make_helper(concat(call_i_, SUFFIX)) {
 	swaddr_write(reg_l(R_ESP),4,cpu.eip+length);
 	print_asm("call $0x%x",cpu.eip);
 	//print_asm("eip $0x%x,%d",cpu.eip,length);
-	//cpu.eip+=length+2;
-	return 11;
+	cpu.eip+=length+1;
+	return length+1;
 }
 
 make_helper(concat(call_rm_, SUFFIX)) {
