@@ -14,7 +14,7 @@ static void do_execute() {
 	if (dest != src && src == cpu.SF){
 		cpu.OF = 1;
 	}
-	cpu.AF = 0;
+	//cpu.AF = 0;
 	uint32_t an = ans >> 4;
 	ans ^= an;
 	uint32_t res = ans >> 2;
