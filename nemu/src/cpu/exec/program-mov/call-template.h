@@ -3,12 +3,12 @@
 #define instr call
 
 make_helper(concat(call_i_, SUFFIX)) {
-	DATA_TYPE_S value = op_src->val;
+	//DATA_TYPE_S value = op_src->val;
 	int length = concat(decode_i_,SUFFIX)(eip+1);
 	reg_l(R_ESP) -= DATA_BYTE;
 	swaddr_write(reg_l(R_ESP),4,cpu.eip+length);
-	print_asm("call1 $0x%x",cpu.eip+1+length+value);
-	print_asm("eip $0x%x,%d",cpu.eip,length);
+	print_asm("call1 $0x%x",cpu.eip+1+length);
+	//print_asm("eip $0x%x,%d",cpu.eip,length);
 	//cpu.eip+=length;
 	return 5;
 }
