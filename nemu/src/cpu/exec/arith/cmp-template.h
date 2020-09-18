@@ -21,7 +21,7 @@ static void do_execute() {
 	ans ^= res;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 0x1);
-	print_asm_template2();;
+	print_asm_template2();
 }
 
 #if DATA_BYTE == 2 || DATA_BYTE == 4
