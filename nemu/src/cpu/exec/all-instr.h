@@ -16,6 +16,7 @@
 #include "arith/idiv.h"
 #include "arith/div.h"
 #include "arith/cmp.h"
+#include "arith/add.h"
 
 #include "logic/and.h"
 #include "logic/or.h"
@@ -26,6 +27,7 @@
 #include "logic/shr.h"
 #include "logic/shrd.h"
 #include "logic/test.h"
+#include "logic/setcc.h"
 
 #include "string/rep.h"
 
@@ -33,8 +35,8 @@
 
 #include "special/special.h"
 
-#include "program-mov/call.h"
-#include "program-mov/je.h"
-#include "program-mov/ret.h"
-#include "program-mov/jmp.h"
+#include "control-trans/call.h"
+#include "control-trans/je.h"
+#include "control-trans/ret.h"
+#include "control-trans/jcc.h"
 
