@@ -32,22 +32,16 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 *
 	op_src->simm = ???
 	 */
-	op_src->simm = instr_fetch(eip,4);
+	op_src->simm = (DATA_TYPE_S)instr_fetch(eip,DATA_BYTE);
 	
 	//panic("please implement me");
 
 	op_src->val = op_src->simm;
 
-	op_dest->type = OP_TYPE_IMM;
-	
-	op_dest->imm = instr_fetch(eip+4,2);
-
-	op_dest->val = op_dest->imm;
-
 #ifdef DEBUG
 	snprintf(op_src->str, OP_STR_SIZE, "$0x%x", op_src->val);
 #endif
-	return 6; //DATA_BYTE
+	return DATA_BYTE; //DATA_BYTE
 }
 #endif
 
@@ -85,6 +79,12 @@ static int concat3(decode_rm_, SUFFIX, _internal) (swaddr_t eip, Operand *rm, Op
 #endif
 	return len;
 }
+
+
+/*make_helper(concat(decode_n_,SUFFIX)){
+	op_src->type = OP_TYPE_NO;
+	return 0;
+}*/
 
 /* Eb <- Gb
  * Ev <- Gv
