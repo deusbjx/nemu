@@ -34,7 +34,7 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 */
 	op_src->simm = instr_fetch(cpu.eip,4);
 	
-	panic("please implement me");
+	//panic("please implement me");
 
 	op_src->val = op_src->simm;
 
@@ -47,7 +47,7 @@ make_helper(concat(decode_si_, SUFFIX)) {
 #ifdef DEBUG
 	snprintf(op_src->str, OP_STR_SIZE, "$0x%x", op_src->val);
 #endif
-	return DATA_BYTE;
+	return 6; //DATA_BYTE
 }
 #endif
 
