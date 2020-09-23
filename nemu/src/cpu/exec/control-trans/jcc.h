@@ -14,3 +14,4 @@
 #include "jge.h" //jnl
 #include "jg.h" //jnle
 #include "jle.h" //jng
+#include "jmp.h"
