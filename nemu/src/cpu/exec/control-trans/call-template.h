@@ -10,7 +10,7 @@ make_helper(concat(call_i_, SUFFIX)) {
 	print_asm("call $0x%x",cpu.eip);
 	//print_asm("eip $0x%x,%d",cpu.eip,length);
 	cpu.eip+=length;
-	return length+3;
+	return length+1;
 }
 
 make_helper(concat(call_rm_, SUFFIX)) {
