@@ -32,7 +32,7 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 *
 	op_src->simm = ???
 	 */
-	op_src->simm = instr_fetch(cpu.eip,4);
+	op_src->simm = instr_fetch(eip,4);
 	
 	//panic("please implement me");
 
