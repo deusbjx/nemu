@@ -15,6 +15,7 @@ static void do_execute() {
 	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
 	print_asm_template2();
+	if (cpu.ZF == 1)print_asm("test success!");
 }
 
 //make_instr_helper(i2r)
