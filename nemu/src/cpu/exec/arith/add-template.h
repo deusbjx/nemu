@@ -4,12 +4,12 @@
 
 static void do_execute() {
 	DATA_TYPE ans =  op_dest->val + op_src->val;
-	uint32_t length = (DATA_BYTE << 3)-1;
+	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = (op_dest->val > ans);
 	int dest = op_dest->val >> length;
 	int src = op_src->val >> length;
-	cpu.OF = (dest != src && src == cpu.SF);
+	cpu.OF = (dest == src && src != cpu.SF);
 	cpu.ZF = !ans;
 	if (cpu.ZF == 1)print_asm("add success,value:%x",ans);
 	else print_asm("add fail,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
