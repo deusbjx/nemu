@@ -5,6 +5,7 @@
 static void do_execute() {
 	DATA_TYPE ans = op_dest->val & op_src->val;
 	cpu.ZF = !ans;
+	if (cpu.ZF == 1)print_asm("test success, value : %d",ans);
 	uint32_t length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = 0;
@@ -14,8 +15,7 @@ static void do_execute() {
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
-	print_asm_template2();
-	if (cpu.ZF == 1)print_asm("test success!");
+	//print_asm_template2();
 }
 
 //make_instr_helper(i2r)
