@@ -7,7 +7,7 @@ static void do_execute() {
 		OPERAND_W(op_src,1);
 	}
 	else OPERAND_W(op_src,0);
-	print_asm_template1();
+	print_asm("setne, ZF:%d",cpu.ZF);
 }
 
 make_instr_helper(rm)

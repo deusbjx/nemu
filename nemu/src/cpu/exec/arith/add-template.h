@@ -18,7 +18,7 @@ static void do_execute() {
 	ans ^= ans >> 4;
 	ans ^= ans >> 2;
 	ans ^= ans >> 1;
-	cpu.PF = !(ans & 0x1);
+	cpu.PF = !(ans & 1);
 	//print_asm_template2();
 }
 
