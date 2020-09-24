@@ -7,7 +7,7 @@ static void do_execute() {
 	cpu.ZF = !ans;
 	if (cpu.ZF == 1)print_asm("test success,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
 	else print_asm("test fail,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
-	uint32_t length = (DATA_BYTE << 3)-1;
+	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = 0;
 	//cpu.AF = 0;

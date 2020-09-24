@@ -5,23 +5,20 @@
 static void do_execute() {
 	DATA_TYPE ans =  op_dest->val - op_src->val;
 	cpu.ZF = !ans;
-	if (cpu.ZF == 1)print_asm("sub success,value:%x",ans);
-	else print_asm("sub fail,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
-	uint32_t length = (DATA_BYTE << 3)-1;
-	cpu.SF = ans >> length;
 	cpu.CF = op_dest->val < op_src->val;
-	cpu.OF = 0;
+	if (cpu.ZF == 1)print_asm("sub success,value:%x",ans);
+	else print_asm("sub fail,dest:%x,src:%x,ans:%x,cpu.CF:%d",op_dest->val,op_src->val,ans,cpu.CF);
+	int length = (DATA_BYTE << 3)-1;
+	cpu.SF = ans >> length;
 	int dest = op_dest->val >> length;
 	int src = op_src->val >> length;
-	if (dest != src && src == cpu.SF){
-		cpu.OF = 1;
-	}
+	cpu.OF = (dest != src && src == cpu.SF);
 	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
 	ans ^= ans >> 4;
 	ans ^= ans >> 2;
 	ans ^= ans >> 1;
-	cpu.PF = !(ans & 0x1);
+	cpu.PF = !(ans & 1);
 	//print_asm_template2();
 }
 
