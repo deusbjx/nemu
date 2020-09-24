@@ -11,6 +11,8 @@ static void do_execute() {
 	int src = op_src->val >> length;
 	cpu.OF = (dest != src && src == cpu.SF);
 	cpu.ZF = !ans;
+	if (cpu.ZF == 1)print_asm("add success,value:%d",ans);
+	else print_asm("add fail,dest:%d,src:%d,ans:%d",op_dest->val,op_src->val,ans);
 	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
 	ans ^= ans >> 4;
