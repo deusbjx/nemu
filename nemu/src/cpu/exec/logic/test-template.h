@@ -5,7 +5,7 @@
 static void do_execute() {
 	DATA_TYPE ans = op_dest->val & op_src->val;
 	cpu.ZF = !ans;
-	if (cpu.ZF == 1)print_asm("test success,value:%d",ans);
+	if (cpu.ZF == 1)print_asm("test success,dest:%d,src:%d,ans:%d",op_dest->val,op_src->val,ans);
 	else print_asm("test fail,dest:%d,src:%d,ans:%d",op_dest->val,op_src->val,ans);
 	uint32_t length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
