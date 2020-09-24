@@ -4,15 +4,13 @@
 
 static void do_execute() {
 	DATA_TYPE ans = op_dest->val & op_src->val;
+	cpu.ZF = !ans;
 	uint32_t length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = 0;
 	//cpu.AF = 0;
-	cpu.ZF = !ans;
-	DATA_TYPE an = ans >> 4;
-	ans ^= an;
-	DATA_TYPE res = ans >> 2;
-	ans ^= res;
+	ans ^= ans >> 4;
+	ans ^= ans >> 2;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
