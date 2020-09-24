@@ -5,7 +5,7 @@
 make_helper(concat(ret_n_, SUFFIX)) {
 	//int value = instr_fetch(eip+1,2);
 	//current_sreg = R_SS;
-	cpu.eip = MEM_R(reg_l(R_ESP));
+	cpu.eip = MEM_R(reg_l(R_ESP))-1;
 	reg_l(R_ESP)+=DATA_BYTE;
 	//MEM_W(REG(R_ESP)+i,0);
 	print_asm("ret");
