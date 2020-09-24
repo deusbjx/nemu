@@ -10,8 +10,8 @@ static void do_execute() {
 	int dest = op_dest->val >> length;
 	int src = op_src->val >> length;
 	cpu.OF = (dest != src && src == cpu.SF);
-	//cpu.AF = 0;
 	cpu.ZF = !ans;
+	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
 	ans ^= ans >> 4;
 	ans ^= ans >> 2;

@@ -16,10 +16,8 @@ static void do_execute() {
 	}
 	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
-	DATA_TYPE an = ans >> 4;
-	ans ^= an;
-	DATA_TYPE res = ans >> 2;
-	ans ^= res;
+	ans ^= ans >> 4;
+	ans ^= ans >> 2;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 0x1);
 	print_asm_template2();
