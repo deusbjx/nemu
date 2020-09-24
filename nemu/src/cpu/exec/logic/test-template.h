@@ -14,7 +14,7 @@ static void do_execute() {
 	uint32_t res = ans >> 2;
 	ans ^= res;
 	ans ^= ans >> 1;
-	cpu.PF = !(ans & 0x1);
+	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
 	print_asm_template2();
 }
