@@ -16,10 +16,8 @@ static void do_execute() {
 	}
 	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
-	uint32_t an = ans >> 4;
-	ans ^= an;
-	uint32_t res = ans >> 2;
-	ans ^= res;
+	ans ^= ans >> 4;
+	ans ^= ans >> 2;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 0x1);
 	print_asm_template2();
@@ -30,7 +28,7 @@ make_instr_helper(si2rm)
 #endif
 
 make_instr_helper(i2a)
-make_instr_helper(i2r)
+//make_instr_helper(i2r)
 make_instr_helper(i2rm)
 make_instr_helper(r2rm)
 make_instr_helper(rm2r)
