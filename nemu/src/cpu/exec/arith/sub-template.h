@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	DATA_TYPE ans =  op_dest->val - op_src->val;
-	//cpu.ZF = !ans;
+	cpu.ZF = !ans;
 	uint32_t length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = op_dest->val < op_src->val;
