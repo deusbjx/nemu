@@ -16,9 +16,9 @@ static void do_execute() {
 	}
 	//cpu.AF = 0;
 	OPERAND_W(op_dest,ans);
-	uint32_t an = ans >> 4;
+	DATA_TYPE an = ans >> 4;
 	ans ^= an;
-	uint32_t res = ans >> 2;
+	DATA_TYPE res = ans >> 2;
 	ans ^= res;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 0x1);
