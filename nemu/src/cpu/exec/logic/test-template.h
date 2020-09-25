@@ -16,7 +16,7 @@ static void do_execute() {
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
-	//print_asm_template2();
+	print_asm_template2();
 }
 
 //make_instr_helper(i2r)

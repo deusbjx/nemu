@@ -6,7 +6,7 @@ static void do_execute() {
 	DATA_TYPE ans =  op_dest->val - op_src->val;
 	cpu.ZF = !ans;
 	cpu.CF = op_dest->val < op_src->val;
-	if (cpu.ZF == 1)print_asm("sub success,value:%x",ans);
+	if (cpu.ZF == 1)print_asm("sub success,value:%x,CF:%d",ans,cpu.CF);
 	else print_asm("sub fail,dest:%x,src:%x,ans:%x,cpu.CF:%d",op_dest->val,op_src->val,ans,cpu.CF);
 	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
@@ -19,7 +19,7 @@ static void do_execute() {
 	ans ^= ans >> 2;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
-	//print_asm_template2();
+	print_asm_template2();
 }
 
 #if DATA_BYTE == 2 || DATA_BYTE == 4
