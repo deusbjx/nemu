@@ -27,7 +27,7 @@ typedef struct {
 	struct{
             uint32_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
         };
-
+     };
 	union {
 		struct {
 			uint32_t CF : 1;
@@ -51,7 +51,6 @@ typedef struct {
 		};
 		uint32_t EFLAGS;
 	};
-     };
 
      swaddr_t eip;
 
