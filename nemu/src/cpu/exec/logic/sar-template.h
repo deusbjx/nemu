@@ -5,14 +5,23 @@
 static void do_execute () {
 	DATA_TYPE src = op_src->val;
 	DATA_TYPE_S dest = op_dest->val;
-
+	DATA_TYPE_S ans = op_dest->val;
+	
+	/* TODO: Update EFLAGS. */
+	cpu.ZF=!ans;
+	cpu.CF=0;
+	cpu.OF=0;
 	uint8_t count = src & 0x1f;
 	dest >>= count;
 	OPERAND_W(op_dest, dest);
-
-	/* TODO: Update EFLAGS. */
-	panic("please implement me");
-
+	ans = dest;
+	int length = (DATA_BYTE << 3)-1;
+	cpu.SF = ans >> length; 
+	ans ^= ans >>4;
+	ans ^= ans >>2;
+	ans ^= ans >>1;
+	cpu.PF=!(ans & 1);
+	//panic("please implement me");
 	print_asm_template2();
 }
 
