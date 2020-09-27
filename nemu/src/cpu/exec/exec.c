@@ -64,12 +64,12 @@ make_group(group2_cl_v,
 
 /* 0xf6 */
 make_group(group3_b,
-	test_i2rm_b, inv, not_rm_b, inv, 
+	test_i2rm_b, inv, not_rm_b, neg_rm_b, 
 	inv, inv, inv, idiv_rm_b)
 
 /* 0xf7 */
 make_group(group3_v,
-	test_i2rm_v, inv, not_rm_v, inv, 
+	test_i2rm_v, inv, not_rm_v, neg_rm_v, 
 	inv, inv, inv, idiv_rm_v)
 
 /* 0xfe */
@@ -110,10 +110,10 @@ helper_fun opcode_table [256] = {
 /* 0x34 */	inv, inv, inv, inv,
 /* 0x38 */	cmp_r2rm_b, cmp_r2rm_v, cmp_rm2r_b, cmp_rm2r_v,
 /* 0x3c */	cmp_i2a_b, cmp_i2a_v, inv, inv,
-/* 0x40 */	inv, inv, inv, inv,
-/* 0x44 */	inv, inv, inv, inv,
-/* 0x48 */	inv, inv, inv, inv,
-/* 0x4c */	inv, inv, inv, inv,
+/* 0x40 */	inc_r_v, inc_r_v, inc_r_v, inc_r_v,
+/* 0x44 */	inc_r_v, inc_r_v, inc_r_v, inc_r_v,
+/* 0x48 */	dec_r_v, dec_r_v, dec_r_v, dec_r_v,
+/* 0x4c */	dec_r_v, dec_r_v, dec_r_v, dec_r_v,
 /* 0x50 */	push_r_v, push_r_v, push_r_v, push_r_v,
 /* 0x54 */	push_r_v, push_r_v, push_r_v, push_r_v,
 /* 0x58 */	pop_r_v, pop_r_v, pop_r_v, pop_r_v,
@@ -122,9 +122,9 @@ helper_fun opcode_table [256] = {
 /* 0x64 */	inv, inv, operand_size, inv,
 /* 0x68 */	push_i_v, imul_i_rm2r_v, push_i_b, imul_si_rm2r_v,
 /* 0x6c */	inv, inv, inv, inv,
-/* 0x70 */	inv, inv, inv, inv,
-/* 0x74 */	je_i_b, jne_i_b, jbe_i_b, inv,
-/* 0x78 */	inv, inv, inv, inv,
+/* 0x70 */	jo_i_b, jno_i_b, jb_i_b, jae_i_b,
+/* 0x74 */	je_i_b, jne_i_b, jbe_i_b, ja_i_b,
+/* 0x78 */	js_i_b, jns_i_b, jp_i_b, jnp_i_b,
 /* 0x7c */	jl_i_b, jge_i_b, jle_i_b, jg_i_b,
 /* 0x80 */	group1_b, group1_v, inv, group1_sx_v, 
 /* 0x84 */	test_r2rm_b, test_r2rm_v, inv, inv,
@@ -197,9 +197,9 @@ helper_fun _2byte_opcode_table [256] = {
 /* 0x84 */	je_i_v, jne_i_v, jbe_i_v, inv,
 /* 0x88 */	inv, inv, inv, inv, 
 /* 0x8c */	jl_i_v, jge_i_v, jle_i_v, jg_i_v, 
-/* 0x90 */	inv, inv, inv, inv,
-/* 0x94 */	inv, setne_rm_b, inv, inv,
-/* 0x98 */	inv, inv, inv, inv, 
+/* 0x90 */	seto_rm_b, inv, setb_rm_b, inv,
+/* 0x94 */	sete_rm_b, setne_rm_b, inv, inv,
+/* 0x98 */	sets_rm_b, inv, setp_rm_b, inv, 
 /* 0x9c */	inv, inv, inv, inv, 
 /* 0xa0 */	inv, inv, inv, inv, 
 /* 0xa4 */	inv, inv, inv, inv,
