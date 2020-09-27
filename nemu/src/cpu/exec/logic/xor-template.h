@@ -3,12 +3,19 @@
 #define instr xor
 
 static void do_execute () {
-	DATA_TYPE result = op_dest->val ^ op_src->val;
-	OPERAND_W(op_dest, result);
-
-	/* TODO: Update EFLAGS. */
-	panic("please implement me");
-
+	/* TODO: Update EFLAGS. */	
+	DATA_TYPE ans = op_dest->val ^ op_src->val;
+	int length = (DATA_BYTE << 3) - 1;
+	cpu.SF=ans >> length;
+    	cpu.ZF=!ans;
+    	OPERAND_W(op_dest, ans);
+	ans ^= ans >>4;
+	ans ^= ans >>2;
+	ans ^= ans >>1;
+	cpu.PF=!(ans & 1);
+	cpu.CF=0;
+	cpu.OF=0;
+	//panic("please implement me");
 	print_asm_template2();
 }
 
