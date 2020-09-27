@@ -3,6 +3,7 @@
 #define instr or
 
 static void do_execute () {
+	/* TODO: Update EFLAGS. */	
 	DATA_TYPE ans = op_dest->val | op_src->val;
 	int length = (DATA_BYTE << 3) - 1;
 	cpu.SF=ans >> length;
