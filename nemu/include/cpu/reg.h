@@ -26,10 +26,9 @@ typedef struct {
 
 	struct{
             uint32_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
-        };
-     };
-	union {
-		struct {
+	    swaddr_t eip;
+	    union {
+            	struct {
 			uint32_t CF : 1;
 			uint32_t    : 1;
 			uint32_t PF : 1;
@@ -50,10 +49,9 @@ typedef struct {
 			uint32_t    : 14;
 		};
 		uint32_t EFLAGS;
+            };
 	};
-
-     swaddr_t eip;
-
+    };
 } CPU_state;
 
 extern CPU_state cpu;
