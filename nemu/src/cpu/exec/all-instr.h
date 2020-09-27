@@ -8,8 +8,6 @@
 #include "data-mov/push.h"
 #include "data-mov/pop.h"
 #include "data-mov/lea.h"
-#include "data-mov/movzw.h"
-#include "data-mov/movzb.h"
 
 #include "arith/dec.h"
 #include "arith/inc.h"
