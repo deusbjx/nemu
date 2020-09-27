@@ -3,9 +3,9 @@
 #define instr adc
 
 static void do_execute() {
-	DATA_TYPE ans =  op_dest->val + op_src->val;
+	DATA_TYPE ans =  op_dest->val + op_src->val+cpu.CF;
 	cpu.ZF = !ans;
-	uint32_t length = (DATA_BYTE << 3)-1;
+	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = op_dest->val > ans;
 	cpu.OF = 0;
