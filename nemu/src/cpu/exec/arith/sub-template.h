@@ -6,8 +6,8 @@ static void do_execute() {
 	DATA_TYPE ans =  op_dest->val - op_src->val;
 	cpu.ZF = !ans;
 	cpu.CF = op_dest->val < op_src->val;
-	if (cpu.ZF == 1)print_asm("sub success,value:%x,CF:%d",ans,cpu.CF);
-	else print_asm("sub fail,dest:%x,src:%x,ans:%x,cpu.CF:%d",op_dest->val,op_src->val,ans,cpu.CF);
+	//if (cpu.ZF == 1)print_asm("sub success,value:%x,CF:%d",ans,cpu.CF);
+	//else print_asm("sub fail,dest:%x,src:%x,ans:%x,cpu.CF:%d",op_dest->val,op_src->val,ans,cpu.CF);
 	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	int dest = op_dest->val >> length;

@@ -5,8 +5,8 @@
 static void do_execute() {
 	DATA_TYPE ans = op_dest->val & op_src->val;
 	cpu.ZF = !ans;
-	if (cpu.ZF == 1)print_asm("test success,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
-	else print_asm("test fail,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
+	//if (cpu.ZF == 1)print_asm("test success,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
+	//else print_asm("test fail,dest:%x,src:%x,ans:%x",op_dest->val,op_src->val,ans);
 	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length;
 	cpu.CF = 0;
