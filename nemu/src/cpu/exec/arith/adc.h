@@ -3,7 +3,7 @@
 
 make_helper(adc_i2a_b);
 make_helper(adc_si2rm_b);
-make_helper(adc_i2r_b);
+//make_helper(adc_i2r_b);
 make_helper(adc_i2rm_b);
 make_helper(adc_r2rm_b);
 make_helper(adc_rm2r_b);
