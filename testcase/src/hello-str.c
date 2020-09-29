@@ -8,6 +8,7 @@ int main() {
 	
 	set_bp();
 	sprintf(buf, "%s", "Hello world!\n");
+	set_bp();
 	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 
 	set_bp();
