@@ -21,9 +21,10 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 int main() { 
 	//FLOAT a = 0.666666;
 	//FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
-	FLOAT ans = f2F(0.551222);
+	FLOAT ans1 = f2F(0.551222);
+	FLOAT ans2 = f2F(0.666666);
 	//FLOAT ans = 0.551222;
-	nemu_assert(ans);
+	nemu_assert(F_div_int(ans2-ans1,10));
 
 	//nemu_assert(Fabs(a - ans) < f2F(1e-4));
 
