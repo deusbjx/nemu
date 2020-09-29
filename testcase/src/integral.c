@@ -23,7 +23,7 @@ int main() {
 	//FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
 	FLOAT ans1 = f2F(0.551222);
 	FLOAT ans2 = f2F(0.666666);
-	FLOAT ans = F_mul_F(ans1,ans2);
+	FLOAT ans = F_mul_F(f(ans1),f(ans2));
 	nemu_assert(ans);
 
 	//nemu_assert(Fabs(a - ans) < f2F(1e-4));
