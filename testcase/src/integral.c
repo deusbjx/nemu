@@ -13,6 +13,7 @@ FLOAT computeT(int n, FLOAT a, FLOAT b) {
 	s = F_div_int(f(a) + f(b), 2 );
 	//s = F_div_int(a + b, 2 );
 	for(k = 1; k < n; k ++) {
+		set_bp();
 		s += f(a + F_mul_int(h, k));
 		s += a + F_mul_int(h, k);
 	}
