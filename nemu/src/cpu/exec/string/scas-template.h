@@ -15,10 +15,10 @@ make_helper(concat(scas_, SUFFIX)) {
 	ans ^= ans >> 4;
 	ans ^= ans >> 2;
 	ans ^= ans >> 1;
-	cpu.PF = !(ans & 0x1);
+	cpu.PF = !(ans & 1);
 	int s1 = se >> length;
 	int s2 = sd >> length;
-    	cpu.OF = ((s1 != s2) && (s2 == cpu.SF));
+    	cpu.OF = (s1 != s2 && s2 == cpu.SF);
 	print_asm("scas%s", str(SUFFIX));
 	return 1;
 }
