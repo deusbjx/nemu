@@ -18,6 +18,14 @@ static void do_execute () {
 
 	OPERAND_W(op_src2, out);
 
+	int length = (DATA_BYTE << 3)-1;
+	cpu.SF = out >> length;
+        cpu.ZF = !out;
+        out ^= out >> 4;
+	out ^= out >> 2;
+	out ^= out >> 1;
+	cpu.PF = !(out & 1);
+
 	print_asm("shrd" str(SUFFIX) " %s,%s,%s", op_src->str, op_dest->str, op_src2->str);
 }
 
