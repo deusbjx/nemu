@@ -37,7 +37,7 @@ int main() {
 	//nemu_assert(1 < 0);
 	FLOAT ans = f2F(0.551222);
 
-	nemu_assert(Fabs(a - ans) > f2F(1e-4));
+	nemu_assert(Fabs(a - ans) < f2F(1e-4));
 
 	return 0;
 }
