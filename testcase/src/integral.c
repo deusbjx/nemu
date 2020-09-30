@@ -10,11 +10,11 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	int k;
 	FLOAT s,h;
 	h = F_div_int((b - a), n);
-	s = F_div_int(f(a) + f(b), 2 );
+	s = F_div_int(fun(a) + fun(b), 2 );
 	//s = F_div_int(a + b, 2 );
-	for(k = 1; k < 200; k ++) {
+	for(k = 1; k < n; k ++) {
 		//set_bp();
-		s += f(a + F_mul_int(h, k));
+		s += fun(a + F_mul_int(h, k));
 		//set_bp();
 		s += a + F_mul_int(h, k);
 		//set_bp();
