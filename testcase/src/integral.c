@@ -22,7 +22,7 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	//set_bp();
 	s = F_mul_F(s, h);
 	//set_bp();
-	return a;
+	return s;
 }
 
 int main() { 
