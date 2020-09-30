@@ -28,13 +28,13 @@ FLOAT computeT(int n, FLOAT a, FLOAT b) {
 int main() { 
 	//FLOAT a = 0.666666;
 	//FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
-	FLOAT ans1 = f2F(0.551222);
+	//FLOAT ans1 = f2F(0.551222);
 	//FLOAT ans2 = f2F(0.666666);
 	//FLOAT ans = F_mul_F(f(a),f(ans2));
 	//nemu_assert(ans);
 
 	//FLOAT a = computeT(3, ans1, ans2);
-	nemu_assert(ans1>0);
+	nemu_assert(Fabs(0)>0);
 	//FLOAT ans = f2F(0.551222);
 
 	//nemu_assert(Fabs(a - ans) < f2F(1e-4));
