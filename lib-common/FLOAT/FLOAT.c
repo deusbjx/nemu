@@ -80,8 +80,12 @@ FLOAT f2F(float a) {
 }
 
 FLOAT Fabs(FLOAT a) {
-	if (a >= 0)return a;
-	else return -a;
+	FLOAT b;
+	if (a < 0)
+		b = - a;
+	else
+		b = a;
+	return b;
 	//nemu_assert(0);
 	//return 0;
 }
