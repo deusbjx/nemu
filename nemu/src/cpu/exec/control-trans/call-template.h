@@ -8,7 +8,7 @@ make_helper(concat(call_i_, SUFFIX)) {
 	swaddr_write(reg_l(R_ESP),4,cpu.eip+length);
 	DATA_TYPE_S value = op_src->val;
 	print_asm("call $0x%x",cpu.eip+1+length+value);
-	printf("%d,%d,%d\n",cpu.ZF,cpu.SF,cpu.OF);
+	//printf("%d,%d,%d\n",cpu.ZF,cpu.SF,cpu.OF);
 	//print_asm("eip $0x%x,%d",cpu.eip,length);
 	cpu.eip+=value;
 	return length+1;
