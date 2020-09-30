@@ -5,16 +5,18 @@
 static void do_execute () {
 	DATA_TYPE src = op_src->val;
 	DATA_TYPE_S dest = op_dest->val;
-	DATA_TYPE_S ans = op_dest->val;
+	//DATA_TYPE_S ans = op_dest->val;
 	
 	/* TODO: Update EFLAGS. */
-	cpu.ZF=!ans;
-	cpu.CF=0;
-	cpu.OF=0;
+	
 	uint8_t count = src & 0x1f;
 	dest >>= count;
 	OPERAND_W(op_dest, dest);
-	ans = dest;
+	
+	DATA_TYPE ans = dest;
+	cpu.ZF=!ans;
+	cpu.CF=0;
+	cpu.OF=0;
 	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length; 
 	ans ^= ans >>4;
