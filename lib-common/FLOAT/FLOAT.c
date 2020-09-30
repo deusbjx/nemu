@@ -72,8 +72,8 @@ FLOAT f2F(float a) {
 	exp -= 150;
 	if (exp < -16) k >>= -16 - exp;
 	if (exp > -16) k <<= exp + 16;
-	if (flag == 0)return k;
-	else return -k;
+	if (flag == 0)return -k;
+	else return k;
 
 	//nemu_assert(0);
 	//return 0;
