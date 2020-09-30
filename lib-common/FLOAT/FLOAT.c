@@ -65,13 +65,16 @@ FLOAT f2F(float a) {
 	 */
 
 	int b = *(int *)&a;
-	int flag = b >> 31;
+	//int flag = b >> 31;
+	int flag = b & 0x80000000;
 	int exp = (b >> 23) & 0xff;
-	FLOAT k = b & 0x7fffff;
-	if (exp != 0) k += 1 << 23;
-	exp -= 150;
-	if (exp < -16) k >>= -16 - exp;
-	if (exp > -16) k <<= exp + 16;
+	int k = b & 0x7fffff;
+	if (exp == 0)return 0;
+	//if (exp != 0) k += 1 << 23;
+	k = k | (1 << 23);
+	exp -= 134;
+	if (exp < 0) k >>= -exp;
+	if (exp > 0) k <<= exp;
 	if (flag == 0)return k;
 	else return -k;
 
