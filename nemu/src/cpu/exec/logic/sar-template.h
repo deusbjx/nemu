@@ -15,8 +15,8 @@ static void do_execute () {
 	
 	DATA_TYPE ans = dest;
 	cpu.ZF=!ans;
-	cpu.CF=0;
-	cpu.OF=0;
+	//cpu.CF=0;
+	//cpu.OF=0;
 	int length = (DATA_BYTE << 3)-1;
 	cpu.SF = ans >> length; 
 	ans ^= ans >>4;
