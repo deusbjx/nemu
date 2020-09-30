@@ -12,7 +12,7 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	h = F_div_int((b - a), n);
 	s = F_div_int(f(a) + f(b), 2 );
 	//s = F_div_int(a + b, 2 );
-	for(k = 1; k < 2; k ++) {
+	for(k = 1; k < 200; k ++) {
 		//set_bp();
 		s += f(a + F_mul_int(h, k));
 		//set_bp();
@@ -37,7 +37,7 @@ int main() {
 	//nemu_assert(1 < 0);
 	FLOAT ans = f2F(0.551222);
 
-	nemu_assert(Fabs(a - ans) < f2F(1e-4));
+	nemu_assert(Fabs(a - ans) > f2F(1e-4));
 
 	return 0;
 }
