@@ -7,37 +7,37 @@ FLOAT f(FLOAT x) {
 }
 
 FLOAT computeT(int n, FLOAT a, FLOAT b) {
-	/*int k;
+	int k;
 	FLOAT s,h;
 	h = F_div_int((b - a), n);
 	s = F_div_int(f(a) + f(b), 2 );
 	//s = F_div_int(a + b, 2 );
 	for(k = 1; k < 2; k ++) {
-		set_bp();
+		//set_bp();
 		s += f(a + F_mul_int(h, k));
-		set_bp();
+		//set_bp();
 		s += a + F_mul_int(h, k);
-		set_bp();
+		//set_bp();
 	}
-	set_bp();
+	//set_bp();
 	s = F_mul_F(s, h);
-	set_bp();*/
+	//set_bp();
 	return a;
 }
 
 int main() { 
 	//FLOAT a = 0.666666;
-	//FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
+	FLOAT a = computeT(10, f2F(-1.0), f2F(1.0));
 	//FLOAT ans1 = f2F(0.551222);
 	//FLOAT ans2 = f2F(0.666666);
 	//FLOAT ans = F_mul_F(f(a),f(ans2));
 	//nemu_assert(ans);
 
 	//FLOAT a = computeT(3, ans1, ans2);
-	nemu_assert(1 < 0);
-	//FLOAT ans = f2F(0.551222);
+	//nemu_assert(1 < 0);
+	FLOAT ans = f2F(0.551222);
 
-	//nemu_assert(Fabs(a - ans) < f2F(1e-4));
+	nemu_assert(Fabs(a - ans) > f2F(1e-4));
 
 	return 0;
 }
