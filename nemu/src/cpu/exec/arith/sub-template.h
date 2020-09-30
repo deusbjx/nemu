@@ -19,7 +19,7 @@ static void do_execute() {
 	ans ^= ans >> 2;
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
-	printf("%d,%d,%d\n",cpu.ZF,cpu.SF,cpu.OF);
+	//printf("%d,%d,%d\n",cpu.ZF,cpu.SF,cpu.OF);
 	print_asm_template2();
 }
 
