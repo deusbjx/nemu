@@ -16,6 +16,7 @@ static void do_execute() {
 	ans ^= ans >> 1;
 	cpu.PF = !(ans & 1);
 	cpu.OF = 0;
+	printf("%d,%d,%d\n",cpu.ZF,cpu.SF,cpu.OF);
 	print_asm_template2();
 }
 
