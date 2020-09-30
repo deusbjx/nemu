@@ -19,6 +19,7 @@ FLOAT computeT(int n, FLOAT a, FLOAT b) {
 		s += a + F_mul_int(h, k);
 		set_bp();
 	}
+	set_bp();
 	s = F_mul_F(s, h);
 	return s;
 }
