@@ -43,6 +43,29 @@ static void modify_vfprintf() {
 	 * hijack.
 	 */
 
+	int addr = &_vfprintf_internal;	//start
+	
+	char *sub = (char *)(addr + 0x306 - 0xb);
+	*sub = 0x8;		
+	sub = (char *)(addr + 0x306 - 0xa);
+	*sub = 0xff;	
+	sub = (char *)(addr + 0x306 - 0x9);
+	*sub = 0x32;	
+	sub = (char *)(addr + 0x306 - 0x8);
+	*sub = 0x90;
+	sub = (char *)(addr + 0x306 - 30);
+	*sub = 0x90;
+	sub = (char *)(addr + 0x306 - 29);
+	*sub = 0x90;
+	sub = (char *)(addr + 0x306 - 33);
+	*sub = 0x90;
+	sub = (char *)(addr + 0x306 - 34);
+	*sub = 0x90; 
+
+	int *pos = (int *)(addr + 0x307);
+
+	*pos += (int)format_FLOAT - (int)(&_fpmaxtostr);
+
 #if 0
 	else if (ppfs->conv_num <= CONV_A) {  /* floating point */
 		ssize_t nf;
@@ -88,6 +111,15 @@ static void modify_ppfs_setargs() {
 	 * Below is the code section in _vfprintf_internal() relative to
 	 * the modification.
 	 */
+
+	int addr = &_ppfs_setargs;
+
+	char *pos = (char *)(addr + 0x71);
+	*pos = 0xeb;
+	pos = (char *)(addr + 0x72);
+	*pos = 0x30;
+	pos = (char *)(addr + 0x73);
+	*pos = 0x90;
 
 #if 0
 	enum {                          /* C type: */
