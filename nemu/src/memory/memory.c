@@ -1,4 +1,7 @@
 #include "common.h"
+#include "stdlib.h"
+#include "burst.h"
+#include "memory/cache.h"
 
 uint32_t dram_read(hwaddr_t, size_t);
 void dram_write(hwaddr_t, size_t, uint32_t);
@@ -6,11 +9,25 @@ void dram_write(hwaddr_t, size_t, uint32_t);
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
-	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
+	int fir_id = cache_read(addr);	//get cache id
+	uint32_t in_addr = addr & (CACHE_SIZE - 1); //inside addr
+	uint8_t tmp[2 * BURST_LEN];
+	if(in_addr + len > CACHE_SIZE) {
+		/* it's time to use unalign_rw */
+		int sec_id = cache_read(addr + CACHE_SIZE - in_addr);
+		memcpy(tmp, cache[fir_id].data + in_addr, CACHE_SIZE - in_addr);
+		memcpy(tmp + CACHE_SIZE - in_addr, cache[sec_id].data, len - (CACHE_SIZE - in_addr));
+	} else {
+		memcpy(tmp, cache[fir_id].data + in_addr, len);
+	}
+	int zero = 0;
+	uint32_t ans = unalign_rw(tmp + zero, 4) & (~0u >> ((4 - len) << 3));
+	return ans;
+	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
-	dram_write(addr, len, data);
+	cache_write(addr,len,data);
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {

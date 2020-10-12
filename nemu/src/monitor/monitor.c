@@ -1,4 +1,5 @@
 #include "nemu.h"
+#include "memory/cache.h"
 
 #define ENTRY_START 0x100000
 
@@ -10,6 +11,7 @@ void load_elf_tables(int, char *[]);
 void init_regex();
 void init_wp_pool();
 void init_ddr3();
+void init_cache();
 
 FILE *log_fp = NULL;
 
@@ -21,6 +23,15 @@ static void init_log() {
 static void welcome() {
 	printf("Welcome to NEMU!\nThe executable is %s.\nFor help, type \"help\"\n",
 			exec_file);
+}
+
+void init_cache(){
+	int i;
+	for (i = 0;i < CACHE_BLOCK_SIZE/CACHE_SIZE;i++){
+		cache[i].valid = false;
+		cache[i].tag = 0;
+		memset(cache[i].data,0,CACHE_SIZE);
+	}
 }
 
 void init_monitor(int argc, char *argv[]) {
@@ -90,4 +101,7 @@ void restart() {
 
 	/* Initialize DRAM. */
 	init_ddr3();
+
+	/* Initialize Cache*/
+	init_cache();
 }
