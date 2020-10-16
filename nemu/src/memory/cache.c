@@ -21,17 +21,18 @@ int cache_read(hwaddr_t addr)
 				break;
 		}
 	}
-	if (!flag)
-	{
+	if (flag == false) {
 		//int j = secondarycache_read (addr);
-		for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
+		/*for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
 			if (!cache[i].valid)break;
 		}
 		//use random way for replace
 		if (i == (g_num + 1) * WAY_8){
 			srand (0);
 			i = g_num * WAY_8 + rand() % WAY_8;
-		}
+		}*/
+		srand(i);
+		i = WAY_8 * g_num + rand() % WAY_8;//random
 		cache[i].valid = true;
 		cache[i].tag = addr >> 13;
 		//memcpy (cache[i].data,cache2[j].data,BLOCK_SIZE);

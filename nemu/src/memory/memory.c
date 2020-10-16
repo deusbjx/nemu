@@ -8,7 +8,7 @@ void dram_write(hwaddr_t, size_t, uint32_t);
 
 /* Memory accessing interfaces */
 
-/*uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
+uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	int fir_id = cache_read(addr);	//get cache id
 	uint32_t in_addr = addr & (CACHE_SIZE - 1); //inside addr
 	uint8_t tmp[2 * BURST_LEN];
@@ -24,15 +24,15 @@ void dram_write(hwaddr_t, size_t, uint32_t);
 	uint32_t ans = unalign_rw(tmp + zero, 4) & (~0u >> ((4 - len) << 3));
 	return ans;
 	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
-}*/
-
-uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
-	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 
+/*uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
+	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
+}*/
+
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
-	dram_write(addr, len, data);	
-	//cache_write(addr,len,data);
+	//dram_write(addr, len, data);	
+	cache_write(addr,len,data);
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
