@@ -36,7 +36,7 @@ int cache_read(hwaddr_t addr)
 	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13) && cache[i].valid){
 				flag = true;
-				return i;
+				//return i;
 				break;
 		}
 	}
@@ -62,15 +62,15 @@ int cache_read(hwaddr_t addr)
 void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 	uint32_t g_num = (addr>>6) & 0x7f; //group number
 	uint32_t in_addr = addr & (CACHE_SIZE - 1); // inside addr
-	//bool flag = false;
+	bool v = false;
 	int i;
-	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
-		if (cache[i].tag == (addr >> 13)&& cache[i].valid){
+	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
+		if (cache[i].tag == (addr >> 13) && cache[i].valid){
 			if(in_addr + len > CACHE_SIZE) {//across
 				dram_write(addr, CACHE_SIZE - in_addr, data);	//write through
 				memcpy(cache[i].data + in_addr, &data, CACHE_SIZE - in_addr);
 				//cache2_write(addr, CACHE_SIZE - in_addr, data);//update cache2
-				cache_write(addr + CACHE_SIZE - in_addr, len - CACHE_SIZE + in_addr, data >> (CACHE_SIZE - in_addr));
+				//cache_write(addr + CACHE_SIZE - in_addr, len - CACHE_SIZE + in_addr, data >> (CACHE_SIZE - in_addr));
 			} 
 			else {
 				dram_write(addr, len, data);
@@ -79,6 +79,19 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 			}
 			return;
 		}
+		
+	}*/
+	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++)
+	{
+		if (cache[i].tag == (addr >> 13) && cache[i].valid)
+			{
+				v = true;
+				break;
+			}
+	}
+	if (v)
+	{
+		memcpy (cache[i].data + in_addr , &data , len);
 	}
 }
 
