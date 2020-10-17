@@ -30,8 +30,8 @@ int cache_read(hwaddr_t addr)
 {
 	uint32_t g_num = (addr >> 6) & 0x7f; //group number
 	printf("group number:%d\n",(g_num+1)*WAY_8);
-	//uint32_t block = (addr >> 6)<<6;
-	int i;
+	uint32_t block = (addr >> 6)<<6;
+	int i,j;
 	bool flag = false;
 	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13) && cache[i].valid){
@@ -51,6 +51,9 @@ int cache_read(hwaddr_t addr)
 		}
 		//srand(i);
 		//i = WAY_8 * g_num + rand() % WAY_8;//random
+		for(j = 0; j < CACHE_BLOCK_SIZE / BURST_LEN; j++) {
+			ddr3_read_public(block + j * BURST_LEN , cache[i].data + j * BURST_LEN);
+		}
 		cache[i].valid = true;
 		cache[i].tag = addr >> 13;
 		//memcpy (cache[i].data,cache2[j].data,CACHE_BLOCK_SIZE);
@@ -79,7 +82,6 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 			return;
 		}
 		else dram_write(addr, len, data);
-		
 	}
 	dram_write(addr, len, data);
 	//dram_write(addr,len,data);
