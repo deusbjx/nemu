@@ -29,8 +29,14 @@ void init_cache(){
 	int i;
 	for (i = 0;i < CACHE_BLOCK_SIZE/CACHE_SIZE;i++){
 		cache[i].valid = false;
-		cache[i].tag = 0;
-		memset(cache[i].data,0,CACHE_SIZE);
+		//cache[i].tag = 0;
+		//memset(cache[i].data,0,CACHE_SIZE);
+	}
+	for (i = 0;i < CACHE2_BLOCK_SIZE/CACHE2_SIZE;i++){
+		cache2[i].valid = false;
+		cache2[i].dirty = false;
+		//cache[i].tag = 0;
+		//memset(cache[i].data,0,CACHE_SIZE);
 	}
 }
 
