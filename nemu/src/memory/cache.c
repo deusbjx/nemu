@@ -41,16 +41,16 @@ int cache_read(hwaddr_t addr)
 	}
 	if (flag == false) {
 		int j = cache2_read (addr);
-		/*for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
+		for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
 			if (!cache[i].valid)break;
 		}
 		//use random way for replace
 		if (i == (g_num + 1) * WAY_8){
 			srand (0);
 			i = g_num * WAY_8 + rand() % WAY_8;
-		}*/
-		srand(i);
-		i = WAY_8 * g_num + rand() % WAY_8;//random
+		}
+		//srand(i);
+		//i = WAY_8 * g_num + rand() % WAY_8;//random
 		cache[i].valid = true;
 		cache[i].tag = addr >> 13;
 		memcpy (cache[i].data,cache2[j].data,CACHE_BLOCK_SIZE);
@@ -61,26 +61,26 @@ int cache_read(hwaddr_t addr)
 void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 	uint32_t g_num = (addr>>6) & 0x7f; //group number
 	uint32_t in_addr = addr & (CACHE_BLOCK_SIZE - 1); // inside addr
-	bool v = false;
+	//bool v = false;
 	int i;
-	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
+	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13) && cache[i].valid){
-			if(in_addr + len > CACHE_SIZE) {//across
-				dram_write(addr, CACHE_SIZE - in_addr, data);	//write through
-				memcpy(cache[i].data + in_addr, &data, CACHE_SIZE - in_addr);
-				//cache2_write(addr, CACHE_SIZE - in_addr, data);//update cache2
-				//cache_write(addr + CACHE_SIZE - in_addr, len - CACHE_SIZE + in_addr, data >> (CACHE_SIZE - in_addr));
+			if(in_addr + len > CACHE_BLOCK_SIZE) {//across
+				dram_write(addr, CACHE_BLOCK_SIZE - in_addr, data);	//write through
+				memcpy(cache[i].data + in_addr, &data, len);
+				cache2_write(addr, len, data);//update cache2
+				cache_write(addr + len, len - CACHE_SIZE + in_addr, data >> len);
 			} 
 			else {
 				dram_write(addr, len, data);
 				memcpy(cache[i].data + in_addr, &data, len);
-				//cache2_write(addr, len, data);
+				cache2_write(addr, len, data);
 			}
 			return;
 		}
 		
-	}*/
-	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++)
+	}
+	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++)
 	{
 		if (cache[i].tag == (addr >> 13) && cache[i].valid)
 			{
@@ -92,7 +92,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 	{
 		memcpy (cache[i].data + in_addr , &data , len);
 	}
-	cache2_write(addr,len,data);
+	cache2_write(addr,len,data);*/
 }
 
 int cache2_read(hwaddr_t addr) {
