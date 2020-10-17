@@ -11,6 +11,21 @@ void ddr3_write_public(hwaddr_t addr, void *data, uint8_t *mask);
 
 /*cache function*/
 
+void init_cache(){
+	int i;
+	for (i = 0;i < CACHE_BLOCK_SIZE/CACHE_SIZE;i++){
+		cache[i].valid = false;
+		cache[i].tag = 0;
+		memset(cache[i].data,0,CACHE_SIZE);
+	}
+	for (i = 0;i < CACHE2_BLOCK_SIZE/CACHE2_SIZE;i++){
+		cache2[i].valid = false;
+		cache2[i].dirty = false;
+		cache2[i].tag = 0;
+		memset(cache2[i].data,0,CACHE2_SIZE);
+	}
+}
+
 int cache_read(hwaddr_t addr) 
 {
 	uint32_t g_num = (addr >> 6) & 0x7f; //group number
@@ -47,7 +62,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 	uint32_t in_addr = addr & (CACHE_SIZE - 1); // inside addr
 	//bool flag = false;
 	int i;
-	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i ++){
+	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13)&& cache[i].valid){
 			if(in_addr + len > CACHE_SIZE) {//across
 				dram_write(addr, CACHE_SIZE - in_addr, data);	//write through
