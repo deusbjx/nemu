@@ -98,6 +98,9 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 		memcpy (cache[i].data + in_addr , &data , len);
 	}
 	cache2_write(addr,len,data);*/
+	i = cache_read(addr);
+	//cache2[i].dirty = true;
+	memcpy(cache[i].data + in_addr, &data, len);
 }
 
 int cache2_read(hwaddr_t addr) {
