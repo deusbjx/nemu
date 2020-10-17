@@ -15,8 +15,8 @@ void init_cache(){
 	int i;
 	for (i = 0;i < CACHE_BLOCK_SIZE/CACHE_SIZE;i++){
 		cache[i].valid = false;
-		cache[i].tag = 0;
-		memset(cache[i].data,0,CACHE_SIZE);
+		//cache[i].tag = 0;
+		//memset(cache[i].data,0,CACHE_SIZE);
 	}
 	for (i = 0;i < CACHE2_BLOCK_SIZE/CACHE2_SIZE;i++){
 		cache2[i].valid = false;
@@ -29,6 +29,7 @@ void init_cache(){
 int cache_read(hwaddr_t addr) 
 {
 	uint32_t g_num = (addr >> 6) & 0x7f; //group number
+	printf("group number:%d\n",g_num);
 	//uint32_t block = (addr >> 6)<<6;
 	int i;
 	bool flag = false;
