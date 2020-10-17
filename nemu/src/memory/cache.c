@@ -35,6 +35,7 @@ int cache_read(hwaddr_t addr)
 	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13) && cache[i].valid){
 				flag = true;
+				return i;
 				break;
 		}
 	}
