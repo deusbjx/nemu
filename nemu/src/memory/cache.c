@@ -81,7 +81,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 			}
 			return;
 		}
-		else dram_write(addr, len, data);
+		//else dram_write(addr, len, data);
 	}
 	dram_write(addr, len, data);
 	//dram_write(addr,len,data);
