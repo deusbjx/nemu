@@ -13,7 +13,7 @@ void ddr3_write_public(hwaddr_t addr, void *data, uint8_t *mask);
 
 int cache_read(hwaddr_t addr) 
 {
-	uint32_t g_num = (addr>>6) & 0x7f; //group number
+	uint32_t g_num = (addr >> 6) & 0x7f; //group number
 	//uint32_t block = (addr >> 6)<<6;
 	int i;
 	bool flag = false;
@@ -24,7 +24,7 @@ int cache_read(hwaddr_t addr)
 		}
 	}
 	if (flag == false) {
-		int j = cache2_read (addr);
+		//int j = cache2_read (addr);
 		/*for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
 			if (!cache[i].valid)break;
 		}
@@ -37,7 +37,7 @@ int cache_read(hwaddr_t addr)
 		i = WAY_8 * g_num + rand() % WAY_8;//random
 		cache[i].valid = true;
 		cache[i].tag = addr >> 13;
-		memcpy (cache[i].data,cache2[j].data,CACHE_SIZE);
+		//memcpy (cache[i].data,cache2[j].data,CACHE_SIZE);
 	}
 	return i;
 }
@@ -52,13 +52,13 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 			if(in_addr + len > CACHE_SIZE) {//across
 				dram_write(addr, CACHE_SIZE - in_addr, data);	//write through
 				memcpy(cache[i].data + in_addr, &data, CACHE_SIZE - in_addr);
-				cache2_write(addr, CACHE_SIZE - in_addr, data);//update cache2
+				//cache2_write(addr, CACHE_SIZE - in_addr, data);//update cache2
 				cache_write(addr + CACHE_SIZE - in_addr, len - CACHE_SIZE + in_addr, data >> (CACHE_SIZE - in_addr));
 			} 
 			else {
 				dram_write(addr, len, data);
 				memcpy(cache[i].data + in_addr, &data, len);
-				cache2_write(addr, len, data);
+				//cache2_write(addr, len, data);
 			}
 			return;
 		}
