@@ -80,6 +80,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 		}
 		
 	}
+	dram_write(addr, len, data);
 	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++)
 	{
 		if (cache[i].tag == (addr >> 13) && cache[i].valid)
