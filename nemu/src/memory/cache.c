@@ -69,7 +69,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 				dram_write(addr, CACHE_BLOCK_SIZE - in_addr, data);	//write through
 				memcpy(cache[i].data + in_addr, &data, len);
 				//cache2_write(addr, len, data);//update cache2
-				cache_write(addr + len, len - CACHE_SIZE + in_addr, data >> len);
+				cache_write(addr + len, len - CACHE_BLOCK_SIZE + in_addr, data >> len);
 			} 
 			else {
 				dram_write(addr, len, data);
@@ -81,6 +81,7 @@ void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 		
 	}
 	dram_write(addr, len, data);
+	dram_write(addr,len,data);
 	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++)
 	{
 		if (cache[i].tag == (addr >> 13) && cache[i].valid)
