@@ -13,12 +13,12 @@ void ddr3_write_public(hwaddr_t addr, void *data, uint8_t *mask);
 
 void init_cache(){
 	int i;
-	for (i = 0;i < CACHE_BLOCK_SIZE/CACHE_SIZE;i++){
+	for (i = 0;i < CACHE_SIZE/CACHE_BLOCK_SIZE;i++){
 		cache[i].valid = false;
 		//cache[i].tag = 0;
 		//memset(cache[i].data,0,CACHE_SIZE);
 	}
-	for (i = 0;i < CACHE2_BLOCK_SIZE/CACHE2_SIZE;i++){
+	for (i = 0;i < CACHE2_SIZE/CACHE2_BLOCK_SIZE;i++){
 		cache2[i].valid = false;
 		cache2[i].dirty = false;
 		cache2[i].tag = 0;
@@ -36,7 +36,6 @@ int cache_read(hwaddr_t addr)
 	for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
 		if (cache[i].tag == (addr >> 13) && cache[i].valid){
 				flag = true;
-				//return i;
 				break;
 		}
 	}
@@ -61,7 +60,7 @@ int cache_read(hwaddr_t addr)
 
 void cache_write(hwaddr_t addr, size_t len,uint32_t data) {
 	uint32_t g_num = (addr>>6) & 0x7f; //group number
-	uint32_t in_addr = addr & (CACHE_SIZE - 1); // inside addr
+	uint32_t in_addr = addr & (CACHE_BLOCK_SIZE - 1); // inside addr
 	bool v = false;
 	int i;
 	/*for (i = g_num * WAY_8 ; i < (g_num + 1) * WAY_8 ;i++){
