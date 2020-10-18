@@ -13,7 +13,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	printf("id:%d\n",fir_id);
 	uint32_t in_addr = addr & (CACHE_BLOCK_SIZE - 1); //inside addr
 	uint8_t tmp[2 * BURST_LEN];
-	if(in_addr + len >= CACHE_SIZE) {
+	if(in_addr + len >= CACHE_BLOCK_SIZE) {
 		// it's time to use unalign_rw 
 		int sec_id = cache_read(addr + len);
 		memcpy(tmp, cache[fir_id].data + in_addr, CACHE_BLOCK_SIZE - in_addr);
