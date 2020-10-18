@@ -29,7 +29,7 @@ void init_cache(){
 int cache_read(hwaddr_t addr) 
 {
 	uint32_t g_num = (addr >> 6) & 0x7f; //group number
-	printf("group number:%d\n",(g_num+1)*WAY_8);
+	//printf("group number:%d\n",(g_num+1)*WAY_8);
 	//uint32_t block = (addr >> 6)<<6;
 	int i,j;
 	bool flag = false;
