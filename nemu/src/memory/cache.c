@@ -149,8 +149,7 @@ void cache2_write(hwaddr_t addr, size_t len, uint32_t data) {
 	uint32_t in_addr = addr & (CACHE2_BLOCK_SIZE - 1); // inside addr
 	int i;
 	bool flag = false;
-	for (i = g_num * WAY_16 ; i < (g_num + 1) * WAY_16 ;i ++)
-	{
+	for (i = g_num * WAY_16 ; i < (g_num + 1) * WAY_16 ;i++) {
 		if (cache2[i].tag == (addr >> 13) && cache2[i].valid) {
 				flag = true;
 				break;
