@@ -134,12 +134,12 @@ int cache2_read(hwaddr_t addr) {
 					ddr3_write_public(block2 + j * BURST_LEN, cache2[i].data + j * BURST_LEN, mask);
 				}
 		}
-		cache2[i].valid = true;
-		cache2[i].tag = addr >> 18;
-		cache2[i].dirty = false;
 		for (j = 0;j < BURST_LEN;j ++){
 			ddr3_read_public(block + j * BURST_LEN , cache2[i].data + j * BURST_LEN);
 		}
+		cache2[i].valid = true;
+		cache2[i].tag = addr >> 18;
+		cache2[i].dirty = false;
 	}
 	return i;
 }
@@ -150,7 +150,7 @@ void cache2_write(hwaddr_t addr, size_t len, uint32_t data) {
 	int i;
 	bool flag = false;
 	for (i = g_num * WAY_16 ; i < (g_num + 1) * WAY_16 ;i++) {
-		if (cache2[i].tag == (addr >> 13) && cache2[i].valid) {
+		if (cache2[i].tag == (addr >> 18) && cache2[i].valid) {
 				flag = true;
 				break;
 		}
