@@ -41,14 +41,16 @@ int cache_read(hwaddr_t addr)
 	}
 	if (flag == false) {
 		j = cache2_read (addr);
-		for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
+		/*for (i = g_num * WAY_8 ; i < (g_num+1) * WAY_8 ;i++){
 			if (!cache[i].valid)break;
 		}
 		//use random way for replace
 		if (i == (g_num + 1) * WAY_8){
 			srand (0);
 			i = g_num * WAY_8 + rand() % WAY_8;
-		}
+		}*/
+		srand(i);
+		i = WAY_8 * g_num + rand() % WAY_8;//random
 		memcpy (cache[i].data,cache2[j].data,CACHE_BLOCK_SIZE);
 		//srand(i);
 		//i = WAY_8 * g_num + rand() % WAY_8;//random
@@ -118,14 +120,16 @@ int cache2_read(hwaddr_t addr) {
 	}
 	if (!flag) {
 		int j;
-		for (i = g_num * WAY_16 ; i < (g_num + 1) * WAY_16 ;i ++){
+		/*for (i = g_num * WAY_16 ; i < (g_num + 1) * WAY_16 ;i ++){
 			if (!cache2[i].valid)break;
 		}
 		//use random way for replace 
 		if (i == (g_num + 1) * WAY_16){
 			srand (0);
 			i = g_num * WAY_16 + rand() % WAY_16;
-		}
+		}*/
+		srand(i);
+		i = WAY_16 * g_num + rand() % WAY_16;//random
 		if (cache2[i].dirty && cache2[i].valid) {
 				uint8_t mask[BURST_LEN * 2];
 				memset(mask, 1, BURST_LEN * 2);
