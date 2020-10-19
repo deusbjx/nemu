@@ -66,6 +66,7 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data, uint8_t sreg) {
 
 /* seg function*/
 lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg) {
+	printf("addr: %d\n",addr);
 	if (cpu.cr0.protect_enable == 1) {
 		Assert(addr+len < cpu.sr[sreg].cache_limit, "Segment Fault!");
 		return cpu.sr[sreg].cache_base + addr;
