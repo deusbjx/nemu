@@ -66,9 +66,11 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data, uint8_t sreg) {
 
 /* seg function*/
 lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg) {
-	if (cpu.cr0.protect_enable == 0)return addr;
-	Assert(addr+len < cpu.sr[sreg].cache_limit, "cs segment out limit");
-	return cpu.sr[sreg].cache_base + addr;	
+	if (cpu.cr0.protect_enable == 1) {
+		Assert(addr+len < cpu.sr[sreg].cache_limit, "Segment Fault!");
+		return cpu.sr[sreg].cache_base + addr;
+	}
+	else return addr;	
 }
 
 void sreg_load(uint8_t sreg) {
