@@ -40,7 +40,8 @@ make_helper(mov_cr2r) {
 		cpu.eax = cpu.cr3.val;
 		print_asm("mov %%%s,%%cr3", REG_NAME(R_EAX));
 	}
-	return 2; //yinggaiwusuoweiba
+	return 2; //yinggaiwusuoweiba 
+	// xingba  haoxiangbushiwusuoweide
 }
 make_helper(mov_r2cr) {
 	uint8_t opcode = instr_fetch(eip + 1, 1);
@@ -53,6 +54,7 @@ make_helper(mov_r2cr) {
 		print_asm("mov %%%s,%%cr3", REG_NAME(R_EAX));
 	}
 	return 2; //yinggaiwusuoweiba
+	// xingba  haoxiangbushiwusuoweide
 }
 #endif
 
@@ -72,7 +74,7 @@ make_helper(mov_seg) {
 		sreg_load(R_SS);
 		print_asm("mov %%%s,ss",REG_NAME(R_EAX));
 	}
-	return 2; //2
+	return 2;
 }
 #endif 
 
