@@ -77,8 +77,8 @@ static void load_entry() {
 }
 
 static void init_CR0() {
-	cpu.cr0.protect_enable = 1;
-	cpu.cr0.paging = 0;
+	cpu.cr0.protect_enable = 0;
+	//cpu.cr0.paging = 0;
 	cpu.cr0.val = cpu.cr3.val = 0;
 }
 
