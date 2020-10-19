@@ -76,6 +76,7 @@ lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg) {
 }
 
 void sreg_load(uint8_t sreg) {
+	printf("Used!\n");
 	uint32_t gd = cpu.gdtr.base_addr;
 	gd += cpu.sr[sreg].index << 3;
 	SegDescriptor sd;
