@@ -76,6 +76,11 @@ static void load_entry() {
 	fclose(fp);
 }
 
+static void init_CR0() {
+	cpu.cr0.protect_enable = 0;
+	cpu.cr0.paging = 0;
+}
+
 void restart() {
 	/* Perform some initialization to restart a program */
 #ifdef USE_RAMDISK
@@ -95,4 +100,11 @@ void restart() {
 
 	/* Initialize Cache*/
 	init_cache();
+
+	/* Initialize CR0*/
+	init_CR0();
+
+	/* To use CS register*/
+	cpu.cs.cache_base = 0;
+	cpu.cs.cache_limit = 0xffffffff;
 }
