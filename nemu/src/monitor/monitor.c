@@ -1,7 +1,7 @@
 #include "nemu.h"
 #include "memory/cache.h"
 
-#define ENTRY_START 0x200000
+#define ENTRY_START 0x100000
 
 extern uint8_t entry [];
 extern uint32_t entry_len;
