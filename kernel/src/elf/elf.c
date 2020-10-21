@@ -39,11 +39,11 @@ uint32_t loader() {
 	//panic("please implement me");
 	int i = 0;
 	ph = (void *)(buf + elf->e_phoff);
-	set_bp();
+	
 	for(; i < elf->e_phnum; i++, ph++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
-
+			set_bp();
                         ph->p_vaddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
 			/* TODO: read the content of the segment from the ELF file 
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
