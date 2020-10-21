@@ -7,7 +7,7 @@
 
 /* Use the function to get the start address of user page directory. */
 PDE* get_updir();
-static PTE vmem[1024] align_to_page;
+static PTE vmem[1024] align_to_page; //kernel virtual address memory
 
 void create_video_mapping() {
 	/* TODO: create an identical mapping from virtual memory area 
