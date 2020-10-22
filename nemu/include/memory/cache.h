@@ -9,8 +9,6 @@
 #define CACHE2_SIZE 1024*1024*4 //4MB
 #define WAY_16 16 //16-way set associative
 
-//uint64_t MEMORY_TIME;
-
 typedef struct {
 	bool valid; //valid bit
 	int tag;
@@ -29,7 +27,6 @@ Cache2 cache2[CACHE2_SIZE/CACHE2_BLOCK_SIZE];
 void init_cache();
 int cache_read(hwaddr_t addr);
 void cache_write(hwaddr_t addr, size_t len, uint32_t data);
-//void addMemoryTime(uint32_t t);
 int cache2_read(hwaddr_t addr);
 void cache2_write(hwaddr_t addr, size_t len, uint32_t data);
 
