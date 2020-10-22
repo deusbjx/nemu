@@ -155,7 +155,7 @@ static int cmd_page(char *args){
 	if(!(cpu.cr0.protect_enable && cpu.cr0.paging)) {
 		printf("Page Addr Transform Fail!\n");
 	}
-	else printf("Page-trans Result: 0x%x -> 0x%x\n", lnaddr, hwaddr);
+	printf("Page-trans Result: 0x%x -> 0x%x\n", lnaddr, hwaddr);
 	return 0;
 }
 
