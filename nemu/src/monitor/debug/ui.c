@@ -1,7 +1,8 @@
 #include "monitor/monitor.h"
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
-#include "nemu.h" 
+#include "nemu.h"
+#include "memory/memory.h"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -155,7 +156,7 @@ static int cmd_page(char *args){
 	if(!(cpu.cr0.protect_enable && cpu.cr0.paging)) {
 		printf("Page Addr Transform Fail!\n");
 	}
-	printf("Page-trans Result: 0x%x -> 0x%x\n", lnaddr, hwaddr);
+	else printf("Page-trans Result: 0x%x -> 0x%x\n", lnaddr, hwaddr);
 	return 0;
 }
 
