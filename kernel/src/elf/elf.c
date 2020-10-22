@@ -3,6 +3,8 @@
 #include <string.h>
 #include <elf.h>
 
+void video_mapping_write_test();
+
 #define ELF_OFFSET_IN_DISK 0
 
 #ifdef HAS_DEVICE
@@ -73,14 +75,12 @@ uint32_t loader() {
 
 #ifdef HAS_DEVICE
 	create_video_mapping();
-	
-	/*test*/
-	video_mapping_write_test();
-		
 #endif
 
 	write_cr3(get_ucr3());
 #endif
 
+	/*test*/
+	video_mapping_write_test();
 	return entry;
 }
