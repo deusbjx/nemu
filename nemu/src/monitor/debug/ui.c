@@ -1,7 +1,7 @@
 #include "monitor/monitor.h"
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
-#include "nemu.h"
+#include "nemu.h" 
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -146,6 +146,19 @@ static int cmd_bt(char *args) {
 	return 0;
 }
 
+/* Add page-trans result*/
+static int cmd_page(char *args){
+	if(args == NULL) return 0;
+	lnaddr_t lnaddr;
+	sscanf(args, "%x", &lnaddr);
+	hwaddr_t hwaddr = page_translate(lnaddr, 1);
+	if(!(cpu.cr0.protect_enable && cpu.cr0.paging)) {
+		printf("Page Addr Transform Fail!\n");
+	}
+	else printf("Page-trans Result: 0x%x -> 0x%x\n", lnaddr, hwaddr);
+	return 0;
+}
+
 
 static int cmd_c(char *args) {
 	cpu_exec(-1);
@@ -174,7 +187,8 @@ static struct {
         { "p", "Evaluate the value of expression", cmd_p },
 	{ "w", "Set watchpoint", cmd_w },
 	{ "d", "Delete watchpoint", cmd_d },
-	{ "bt", "Display backtrace", cmd_bt }
+	{ "bt", "Display backtrace", cmd_bt },
+	{ "page", "Print page addr translation result", cmd_page}
 
 };
 
