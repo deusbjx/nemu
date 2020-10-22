@@ -4,6 +4,8 @@
 #include <elf.h>
 
 void video_mapping_write_test();
+void video_mapping_read_test();
+void video_mapping_clear();
 
 #define ELF_OFFSET_IN_DISK 0
 
@@ -81,6 +83,8 @@ uint32_t loader() {
 #endif
 
 	/*test*/
-	video_mapping_write_test();
+	void video_mapping_write_test();
+	void video_mapping_read_test();
+	void video_mapping_clear();
 	return entry;
 }
