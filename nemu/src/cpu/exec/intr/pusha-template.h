@@ -1,6 +1,6 @@
 #include "cpu/exec/template-start.h"
 
-//#define instr pusha
+//#define instr pusha //Big problem happens!
 
 void concat(tmp_push_, SUFFIX) (uint32_t value) {
 	reg_l(R_ESP) -= DATA_BYTE;

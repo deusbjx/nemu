@@ -8,13 +8,13 @@ void tmp_push_l (uint32_t val);
 
 void raise_intr(uint8_t NO){
 	/*Start Interrupt*/	
-	//tmp_push_l(cpu.val);
+	tmp_push_l(cpu.eflags.val);
 	if(cpu.cr0.protect_enable == 0) {
 		cpu.eflags.IF = 0;
 		cpu.eflags.TF = 0;
 	}
-	//tmp_push_l(cpu.cs.val);
-	//tmp_push_l(cpu.eip);
+	tmp_push_l(cpu.cs.val);
+	tmp_push_l(cpu.eip);
 	
 	/*Use NO to index the IDT*/
 	uint32_t base = cpu.idtr.base;
