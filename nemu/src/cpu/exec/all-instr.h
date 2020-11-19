@@ -8,6 +8,7 @@
 #include "data-mov/cltd.h"
 #include "data-mov/leave.h"
 #include "data-mov/mov-sreg.h"
+#include "data-mov/lidt.h"
 
 #include "arith/cmp.h"
 #include "arith/dec.h"
@@ -51,3 +52,9 @@
 #include "special/special.h"
 
 #include "system/system.h"
+
+#include "intr/int.h"
+#include "intr/pusha.h"
+#include "intr/popa.h"
+#include "intr/iret.h"
+#include "intr/cli.h"
