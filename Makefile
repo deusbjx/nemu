@@ -53,7 +53,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := backup_testcase/hello-inline-asm.c
+USERPROG := obj/testcase/hello-inline-asm
 #ENTRY := $(USERPROG)
 ENTRY := $(kernel_BIN)
 
