@@ -38,6 +38,8 @@
 #include "control/ret.h"
 #include "control/jcc.h"
 #include "control/jmp.h"
+#include "control/js.h"
+#include "control/jns.h"
 
 #include "string/rep.h"
 #include "string/movs.h"
