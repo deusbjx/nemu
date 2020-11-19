@@ -32,7 +32,7 @@ make_helper(nemu_trap) {
 			{
 				int i;
 				for(i = 0; i < cpu.edx; i++) {
-					printf("%d ", (swaddr_read(cpu.ecx + i, 1, R_CS)));
+					printf("%c ", (swaddr_read(cpu.ecx + i, 1, R_CS)));
 				}
 		   		break;
 			}
