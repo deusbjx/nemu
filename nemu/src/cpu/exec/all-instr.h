@@ -40,6 +40,7 @@
 #include "control/jmp.h"
 #include "control/js.h"
 #include "control/jns.h"
+#include "control/jae.h"
 
 #include "string/rep.h"
 #include "string/movs.h"
