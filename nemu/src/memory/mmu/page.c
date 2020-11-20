@@ -24,6 +24,8 @@ hwaddr_t page_walk(lnaddr_t lnaddr) {
 	//Log("test");
 	
 	if(!pde.present) {
+		void do_int3();
+		do_int3();
 		Log("eip = %x, lnaddr = %x, pdir_base = %x, pde = %x", cpu.eip, lnaddr, pdir_base, pde.val);
 		Log("Error1!");
 		assert(0);
