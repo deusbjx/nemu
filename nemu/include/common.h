@@ -3,7 +3,7 @@
 
 //#define USE_RAMDISK
 #define ENABLE_CACHE
-//#define ENABLE_TLB
+#define ENABLE_TLB
 
 /* You will define this macro in PA4 */
 #define HAS_DEVICE
