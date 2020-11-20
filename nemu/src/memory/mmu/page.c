@@ -28,7 +28,7 @@ hwaddr_t page_walk(lnaddr_t lnaddr) {
 		do_int3();
 		Log("eip = %x, lnaddr = %x, pdir_base = %x, pde = %x", cpu.eip, lnaddr, pdir_base, pde.val);
 		Log("Error1!");
-		assert(0);
+		//assert(0);
 	}
 
 	hwaddr_t pt_base = pde.val & ~PAGE_MASK;
