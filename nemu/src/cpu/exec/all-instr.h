@@ -64,3 +64,4 @@
 #include "io/in.h"
 #include "io/out.h"
 #include "io/hlt.h"
+#include "io/sti.h"
