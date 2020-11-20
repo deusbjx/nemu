@@ -60,3 +60,7 @@
 #include "intr/popa.h"
 #include "intr/iret.h"
 #include "intr/cli.h"
+
+#include "io/in.h"
+#include "io/out.h"
+#include "io/hlt.h"
