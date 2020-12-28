@@ -19,6 +19,7 @@ void init_cond();
 /* Initialization phase 1
  * The assembly code in start.S will finally jump here.
  */
+
 void init() {
 #ifdef IA32_PAGE
 	/* We must set up kernel virtual memory first because our kernel thinks it 
@@ -28,37 +29,52 @@ void init() {
 
 	/* After paging is enabled, transform %esp to virtual address. */
 	asm volatile("addl %0, %%esp" : : "i"(KOFFSET));
+
+//	set_bp();
 #endif
 
 	/* Jump to init_cond() to continue initialization. */
-	asm volatile("jmp *%0" : : "r"(init_cond));
+//	
+//	set_bp();
+	asm volatile("jmp *%0" : : "r"(init_cond));	//absolute
+	//init_cond();//call relative
 
 	panic("should not reach here");
 }
 
 /* Initialization phase 2 */
 void init_cond() {
+//	set_bp();
 #ifdef IA32_INTR
 	/* Reset the GDT, since the old GDT in start.S cannot be used in the future. */
 	init_segment();
+//	set_bp();
 
 	/* Set the IDT by setting up interrupt and exception handlers.
 	 * Note that system call is the only exception implemented in NEMU.
 	 */
 	init_idt();
+//	set_bp();
 #endif
 
+
 #ifdef HAS_DEVICE
+	//set_bp();
 	/* Initialize the intel 8259 PIC (Programmable interrupt controller). */
 	init_i8259();
+	//set_bp();
 
 	/* Initialize the serial port. After that, you can use printk() to output messages. */
 	init_serial();
 
 	printk("");
 
+//	set_bp();
+
 	/* Initialize the IDE driver. */
+//	set_bp();
 	init_ide();
+//	set_bp();
 
 	/* Enable interrupts. */
 	sti();
@@ -68,29 +84,41 @@ void init_cond() {
 	/* Initialize the memory manager. */
 	init_mm();
 #endif
-
 	/* Output a welcome message.
 	 * Note that the output is actually performed only when
 	 * the serial port is available in NEMU.
 	 */
+	//set_bp();
 	Log("Hello, NEMU world!");
 
-#if defined(IA32_PAGE) //&& defined(HAS_DEVICE)
+//In PA3-3
+#if defined(IA32_PAGE) && defined(HAS_DEVICE)
 	/* Write some test data to the video memory. */
+
+	Log("video mapping write test..");
 	video_mapping_write_test();
+
 #endif
 
 	/* Load the program. */
+	Log("Loading...");
 	uint32_t eip = loader();
+//	set_bp();
 	
-#if defined(IA32_PAGE) //&& defined(HAS_DEVICE)
+#if defined(IA32_PAGE) && defined(HAS_DEVICE)
 	/* Read data in the video memory to check whether 
 	 * the test data is written sucessfully.
 	 */
 	video_mapping_read_test();
+	Log("test end");
 
 	/* Clear the test data we just written in the video memory. */
+
+	//set_bp();
 	video_mapping_clear();
+	Log("clear end");
+	//set_bp();
+
 #endif
 
 #ifdef IA32_PAGE
@@ -105,6 +133,7 @@ void init_cond() {
 
 	/* Here we go! */
 	((void(*)(void))eip)();
+	Log("running...");
 
 	HIT_GOOD_TRAP;
 
