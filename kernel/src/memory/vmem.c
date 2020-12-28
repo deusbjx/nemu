@@ -4,26 +4,42 @@
 
 #define VMEM_ADDR 0xa0000
 #define SCR_SIZE (320 * 200)
-#define NR_PT ((SCR_SIZE + PT_SIZE - 1) / PT_SIZE)
+#define NR_PT ((SCR_SIZE + PT_SIZE - 1) / PT_SIZE)  // number of page tables to cover the vmem
+static PTE vmem_ptable[NR_PT][NR_PTE] align_to_page;
 
 /* Use the function to get the start address of user page directory. */
 PDE* get_updir();
-static PTE vmem_pt[1024] align_to_page;
 
 void create_video_mapping() {
-	//000a 0000
 	/* TODO: create an identical mapping from virtual memory area 
 	 * [0xa0000, 0xa0000 + SCR_SIZE) to physical memory area 
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
-	PDE *pdp = (PDE *)va_to_pa(get_updir());
-	pdp[0].page_frame = (uint32_t) va_to_pa(vmem_pt) >> 12;
-	pdp[0].present = 1;
-	int i;
-	for(i = VMEM_ADDR / PAGE_SIZE; i < (VMEM_ADDR + SCR_SIZE) / PAGE_SIZE + 1; i++) {
-		vmem_pt[i].page_frame = i;
-		vmem_pt[i].present = 1;
+	//panic("please implement me");
+	PDE *updir = get_updir();
+
+	uint32_t va = VMEM_ADDR;
+	int len = SCR_SIZE;
+	int pt_idx = 0;
+
+	for(; len > 0; len -= PAGE_SIZE, va += PAGE_SIZE) {
+		int pde_idx = va / PT_SIZE;
+		PTE *pt;
+
+		if(updir[pde_idx].present == 0) {
+			pt = vmem_ptable[pt_idx ++];
+			updir[pde_idx].val = make_pde(va_to_pa(pt));
+			memset(pt, 0, NR_PTE * sizeof(NR_PTE));
+		}
+		else {
+			pt = (void *)pa_to_va(updir[pde_idx].val & ~0xfff);
+		}
+
+		int pte_idx = (va % PT_SIZE) / PAGE_SIZE;
+		if(pt[pte_idx].present == 0) {
+			pt[pte_idx].val = make_pte(va);
+		}
 	}
 }
 
